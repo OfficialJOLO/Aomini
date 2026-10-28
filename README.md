@@ -142,7 +142,7 @@ The planned application will run locally using Python, Flask, and Ollama.
 |---|---|---|
 | Jinyong Park | Jay | 6858014756 |
 | Nawiphad Kositkun | Aom | 6858033656 |
-| Team Member 3 (if applicable) | TBD | TBD |
+| Syed Aamiz Raza | Aamiz | 685024056 |
 
 ## 🎓 Academic Project
 
