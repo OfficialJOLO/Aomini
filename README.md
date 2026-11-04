@@ -71,8 +71,6 @@ Example questions:
 
 The budget data is illustrative, not live restaurant pricing.
 
-> **GitHub submission:** This repository contains the functional source code, **not the PDFs**. Uploaded documents, extracted text, and embeddings stay in local storage. A fresh installation starts with an empty collection. Text-based PDFs are required; scanned PDFs need OCR first.
-
 ## 📁 Main Files
 
 ```text
