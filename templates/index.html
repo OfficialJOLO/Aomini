@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A little help choosing Thai food. Private, local, and grounded in your own PDFs.">
+  <title>Aomini — What should I eat?</title>
+  <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#question">Skip to chat</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Aomini home"><span class="brand-mark" aria-hidden="true">a</span>Aomini<span class="brand-dot">.</span></a>
+    <div class="header-caption">A little help with your next meal.</div>
+    <div class="local-label"><span aria-hidden="true"></span> Made to run locally</div>
+  </header>
+
+  <main class="workspace">
+    <div class="workspace-topline"><span>WHAT SHOULD I EAT?</span><span>Thai food, thoughtfully chosen.</span></div>
+    <div class="workspace-grid">
+      <section class="chat-panel" aria-labelledby="chat-heading">
+        <div class="panel-header"><h1 id="chat-heading"><span class="tiny-dot" aria-hidden="true"></span> Chat</h1><button id="clear-chat" class="text-button" type="button" title="Clear this conversation">New conversation <span aria-hidden="true">↗</span></button></div>
+        <div id="conversation" class="conversation" role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions">
+          <div id="welcome" class="welcome">
+            <div class="bowl-art" aria-hidden="true"><svg viewBox="0 0 140 95" fill="none"><path d="M45 24c-8-9 9-10 2-20M69 24c-8-9 9-10 2-20M93 24c-8-9 9-10 2-20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><ellipse cx="70" cy="40" rx="47" ry="11" stroke="currentColor" stroke-width="1.5"/><path d="M23 40c3 30 20 42 47 42s44-12 47-42M55 82v5h30v-5" stroke="currentColor" stroke-width="1.5"/><path d="m94 33 32-24M100 35l32-22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M39 39c5-5 8 5 13 0s8 5 13 0 8 5 13 0" stroke="currentColor" stroke-width="1.2"/></svg></div>
+            <p class="eyebrow">YOUR NEXT MEAL STARTS HERE</p>
+            <h2>Good food.<br><em>Better decisions.</em></h2>
+            <p class="welcome-copy">Tell me what you're craving. I'll look through your Thai food documents for something that fits.</p>
+            <div class="suggestions" aria-label="Example questions">
+              <button type="button" data-question="Which dishes in my documents are spicy?">Something spicy <span aria-hidden="true">↗</span></button>
+              <button type="button" data-question="Do my documents mention any meals under 100 baht? Only use documented prices.">Under ฿100 <span aria-hidden="true">↗</span></button>
+              <button type="button" data-question="What documents are in my collection?">My documents <span aria-hidden="true">↗</span></button>
+            </div>
+            <p class="welcome-note">Start by adding a PDF to your collection <span aria-hidden="true">↗</span></p>
+          </div>
+        </div>
+        <div class="composer-area">
+          <div id="chat-error" class="error-message" role="alert" hidden></div>
+          <form id="chat-form" class="composer">
+            <label class="sr-only" for="question">Ask about Thai food</label>
+            <textarea id="question" name="question" rows="2" maxlength="2000" placeholder="What are you in the mood for?" required></textarea>
+            <div class="composer-bottom"><span>From your documents, to your plate.</span><button id="send" type="submit" aria-label="Send question"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18V6m-5 5 5-5 5 5"/></svg></button></div>
+          </form>
+          <p class="composer-note">Answers use your PDFs. Check the cited pages for details.</p>
+        </div>
+      </section>
+
+      <aside class="collection-panel" aria-labelledby="collection-heading">
+        <div class="panel-header"><h2 id="collection-heading">Document collection <span id="document-count" class="count">0</span></h2><span class="section-number" aria-hidden="true">01 /</span></div>
+        <div class="collection-body">
+          <p class="collection-intro">Your ingredients for a better answer.<br>Add menus, food guides, or class notes.</p>
+          <div id="drop-zone" class="drop-zone">
+            <svg class="upload-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 21V6m-6 6 6-6 6 6M6 22v4h20v-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <p>Drop your PDFs here</p>
+            <p class="upload-detail">or <button id="browse" type="button">browse files</button></p>
+            <span>PDF only · Up to 20 MB per file</span>
+            <input id="file-input" type="file" accept=".pdf,application/pdf" multiple hidden>
+          </div>
+          <div id="upload-error" class="error-message" role="alert" hidden></div>
+          <p id="upload-progress" class="upload-progress" role="status" hidden></p>
+          <div class="list-label"><span>IN YOUR COLLECTION</span><span id="ready-count">0 ready</span></div>
+          <div id="document-list" class="document-list" aria-label="Uploaded documents"></div>
+          <div id="empty-collection" class="empty-collection"><span class="empty-rule" aria-hidden="true"></span><p>A fresh start.</p><span>Your documents will appear here.<br>Nothing is preloaded.</span></div>
+          <p class="collection-tip">Click a filename to open the original PDF.<br>Text-based PDFs work best. Scans need OCR.</p>
+        </div>
+        <div class="system-status">
+          <div class="system-title"><span id="status-dot" class="status-dot"></span><span id="status-label">Checking local models…</span><button id="refresh-status" class="text-button" type="button" aria-label="Check Ollama connection again">↻</button></div>
+          <p id="status-detail">Connecting to Ollama</p>
+          <div class="model-tags"><span>qwen3:1.7b</span><span>nomic-embed-text</span></div>
+        </div>
+      </aside>
+    </div>
+    <footer><span>AOMINI <span aria-hidden="true">/</span> GOOD FOOD, BETTER DECISIONS.</span><span>A local knowledge experiment.</span></footer>
+  </main>
+</body>
+</html>
